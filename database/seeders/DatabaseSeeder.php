@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Integration;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +14,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Integration::query()->insert([
+            [
+                'id' => 1,
+                'name' => 'Creatio',
+                'host' => 'https://www.creatio.com/ua/',
+                'username' => 'username',
+                'password' => 'password'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Perfectum',
+                'host' => 'https://perfectum.ua/',
+                'username' => 'perfectum',
+                'password' => 'password1'
+            ]
+        ]);
     }
 }
