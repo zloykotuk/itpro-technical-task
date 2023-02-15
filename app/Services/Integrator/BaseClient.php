@@ -67,4 +67,10 @@ class BaseClient
     {
         return array_merge($data, $this->appendResponse());
     }
+
+    //TODO: Можна додати логіку до всіх запитів
+    public function prepareData(array $data): array
+    {
+        return [];
+    }
 }

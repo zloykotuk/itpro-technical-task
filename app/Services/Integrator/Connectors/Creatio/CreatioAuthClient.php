@@ -11,8 +11,10 @@ class CreatioAuthClient extends CreatioClient implements AuthOperations
     public function signUp(User $user): array
     {
         //TODO: Тут є можливість додати обробку перед данних перед відправкою
+        $data = $user->toArray();
+
         try {
-            $response = $this->client->post('/sigup', $user->toArray());
+            $response = $this->client->post('/sigup', $this->prepareData($data));
 
             if ($response->failed()) {
                 throw new \HttpRequestException('Failed query');

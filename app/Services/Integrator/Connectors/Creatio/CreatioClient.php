@@ -41,4 +41,11 @@ class CreatioClient extends BaseClient
         $response = ['client' => true];
         return array_merge(parent::appendResponse(), $response);
     }
+
+    //TODO: Можна додати логіку до запиту, якщо є запит до цієї CRM
+    public function prepareData(array $data): array
+    {
+        $request = ['clientPrepare' => true];
+        return array_merge(parent::prepareData($data), $request);
+    }
 }
