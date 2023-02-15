@@ -2,6 +2,7 @@
 
 namespace App\Data\User;
 
+use App\Exceptions\IntegratorDataException;
 use App\Models\Integration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
@@ -20,18 +21,21 @@ class Integrator extends Data
     ) {
     }
 
-    public static function fromRequest(Request $request): static
+    /**
+     * @throws IntegratorDataException
+     */
+    public static function fromID(Request $request): static
     {
         $id = $request->get('integrator_id');
 
         if (!$id) {
-            throw new \Error('integrator_id is required');
+            throw new IntegratorDataException('integrator_id is required');
         }
 
         $integration = Integration::query()->find($id);
 
         if (!$integration) {
-            throw new \Error('Integration not found');
+            throw new IntegratorDataException('Integration not found');
         }
 
         return new self(
