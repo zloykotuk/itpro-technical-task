@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Integration::query()->insert([
             [
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Perfectum',
                 'host' => 'https://perfectum.ua/',
+                'token' => '6IQIcOwDdstrjcFF',
                 'username' => 'perfectum',
                 'password' => 'password1'
             ]

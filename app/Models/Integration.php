@@ -11,6 +11,10 @@ class Integration extends Model
 
     public $timestamps = false;
 
+    protected $dates = [
+        'token_expires_in'
+    ];
+
     protected $fillable = [
         'name',
         'host',

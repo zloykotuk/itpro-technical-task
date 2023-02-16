@@ -11,14 +11,18 @@ use Illuminate\Support\Facades\Http;
 
 class BaseClient
 {
+    //TODO: Видалити якщо потрібно щоб запити відправлялися на стороні сервера
     use HttpMock;
     protected PendingRequest $client;
 
     protected array $headers = [];
 
+    protected Integrator $integrator;
+
     public function __construct(Integrator $integrator)
     {
         $this->fake();
+        $this->integrator = $integrator;
         $this->client = Http::baseUrl($integrator->host);
     }
 

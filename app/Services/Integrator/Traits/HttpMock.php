@@ -11,7 +11,8 @@ trait HttpMock
     {
         Http::fake([
             'https://www.creatio.com/ua/getKey' => Http::response(['api' => Str::random()]),
-            'https://www.creatio.com/ua/sigup' => Http::response(['status' => 'ok', 'message' => 'ok']),
+            'https://www.creatio.com/ua/sigup' => Http::response(['status' => 'ok', 'message' => 'ok', 'integrator' => 'creatio']),
+            'https://perfectum.ua/api/example/sigup' => Http::response(['status' => 'ok', 'message' => 'ok', 'integrator' => 'perfectum']),
         ]);
     }
 }

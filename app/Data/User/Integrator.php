@@ -4,8 +4,11 @@ namespace App\Data\User;
 
 use App\Exceptions\IntegratorDataException;
 use App\Models\Integration;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Carbon;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 
 class Integrator extends Data
@@ -15,7 +18,8 @@ class Integrator extends Data
         public string $name,
         public string $host,
         public ?string $token,
-        public ?Date $token_expires_in,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        public ?Carbon $token_expires_in,
         public string $username,
         public string $password,
     ) {
