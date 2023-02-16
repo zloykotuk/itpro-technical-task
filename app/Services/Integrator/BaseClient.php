@@ -13,6 +13,7 @@ class BaseClient
 {
     //TODO: Видалити якщо потрібно щоб запити відправлялися на стороні сервера
     use HttpMock;
+
     protected PendingRequest $client;
 
     protected array $headers = [];

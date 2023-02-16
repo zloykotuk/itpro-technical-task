@@ -12,7 +12,7 @@ class SignUpAction extends Action
     public function __invoke(User $user, Integrator $integrator)
     {
         try {
-            $authClassName = '\App\Services\Integrator\\Connectors\\' . $integrator->name . '\\' .$integrator->name. 'AuthClient';
+            $authClassName = '\App\Services\Integrator\\Connectors\\' . $integrator->name . '\\' . $integrator->name . 'AuthClient';
             $authClient = new $authClassName($integrator);
             return $authClient->signUp($user);
         } catch (\Throwable $exception) {

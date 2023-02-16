@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('user')->group(function () {
-   Route::post('/', [AuthController::class, 'signUp']);
+    Route::post('/', [AuthController::class, 'signUp']);
 });

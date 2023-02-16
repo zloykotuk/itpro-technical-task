@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Log;
 
 class PerfectumAuthClient extends PerfectumClient implements AuthOperations
 {
-
     public function signUp(User $user): array
     {
         //TODO: Тут є можливість додати обробку перед данних перед відправкою

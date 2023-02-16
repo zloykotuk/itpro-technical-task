@@ -7,7 +7,6 @@ use App\Services\Integrator\BaseClient;
 
 class PerfectumClient extends BaseClient
 {
-
     public function __construct(Integrator $integrator)
     {
         parent::__construct($integrator);
