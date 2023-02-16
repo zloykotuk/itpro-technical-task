@@ -24,7 +24,12 @@
                             <n-input v-model:value="modelRef.lastName" @keydown.enter.prevent/>
                         </n-form-item>
                         <n-form-item path="integrator" label="Integrator">
-                            <n-select v-model:value="modelRef.integrator" :options="INTEGRATOR_OPTION" @keydown.enter.prevent/>
+                            <n-select
+                                v-model:value="modelRef.integrator"
+                                :options="integrationOptionsRef"
+                                :loading="integrationLoadingRef"
+                                @keydown.enter.prevent
+                            />
                         </n-form-item>
                         <n-form-item
                             ref="rPasswordFormItemRef"
@@ -48,7 +53,7 @@
                                         @click="handleValidateButtonClick"
                                         @keydown.enter.prevent
                                     >
-                                        Validate
+                                        Continue
                                     </n-button>
                                 </div>
                             </n-col>
@@ -71,22 +76,23 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {
     FormInst,
     FormItemInst,
     FormRules,
-    FormValidationError, useLoadingBar,
+    FormValidationError, SelectOption, useLoadingBar,
     useMessage,
 } from "naive-ui";
 
 import {validateEmail} from "../../utils/rules/email";
-import {INTEGRATOR_OPTION} from "../../constants/integrator";
 import {ModelType} from "./interfaces/Model";
 import {signUp} from "../../utils/services/auth";
 import {validationMaxLength, validationMinLength} from "../../utils/rules/input";
 import {validatePasswordSame, validatePasswordStartWith} from "../../utils/rules/password";
 import {prepareSignUp} from "../../utils/prepare/auth";
+import {getIntegrations} from "../../utils/services/integration";
+import {SignUpRequest} from "../../interfaces/auth/signup";
 
 const formRef = ref<FormInst | null>(null)
 const rPasswordFormItemRef = ref<FormItemInst | null>(null)
@@ -101,8 +107,30 @@ const modelRef = ref<ModelType>({
     integrator: null
 })
 
-const requestData = ref<any>({});
-const responseData = ref<any>({});
+const integrationLoadingRef = ref(false)
+const integrationOptionsRef = ref<SelectOption[]>([])
+
+const requestData = ref<SignUpRequest | null>(null);
+const responseData = ref<any>(null);
+
+onMounted(() => {
+    integrationLoadingRef.value = true;
+    loadingBar.start()
+    getIntegrations()
+        .then(
+            (res) => {
+                loadingBar.finish()
+                integrationLoadingRef.value = false;
+                integrationOptionsRef.value = res.data.data.map((el) =>
+                    ({value: el.id.toString(), label: el.name}))
+            })
+        .catch((e) => {
+            loadingBar.finish()
+            console.error(e.toString())
+            integrationOptionsRef.value = []
+            integrationLoadingRef.value = false;
+        })
+})
 
 const rules: FormRules = {
     firstName: [
@@ -203,8 +231,8 @@ const handleValidateButtonClick = (e: MouseEvent) => {
                     })
             } else {
                 message.error('Fix the mistakes')
-                requestData.value = {}
-                responseData.value = {}
+                requestData.value = null
+                responseData.value = null
             }
         }
     )

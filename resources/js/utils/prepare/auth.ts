@@ -1,6 +1,7 @@
-import {ModelRequest, ModelType} from "../../pages/SignUp/interfaces/Model";
+import {ModelType} from "../../pages/SignUp/interfaces/Model";
+import {SignUpRequest} from "../../interfaces/auth/signup";
 
-export const prepareSignUp = (model: ModelType): ModelRequest => {
+export const prepareSignUp = (model: ModelType): SignUpRequest => {
     const {firstName, lastName, password, reenteredPassword, email, integrator} = model
     return {
         first_name: firstName,

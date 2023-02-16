@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Integration\IntegrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
     Route::post('/', [AuthController::class, 'signUp']);
+});
+
+Route::prefix('/integration')->group(function () {
+   Route::get('/', [IntegrationController::class, 'index']);
 });
