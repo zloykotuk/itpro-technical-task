@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Creatio',
+                'token' => null,
                 'host' => 'https://www.creatio.com/ua/',
                 'username' => 'username',
                 'password' => 'password'
@@ -25,8 +26,8 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Perfectum',
-                'host' => 'https://perfectum.ua/',
                 'token' => '6IQIcOwDdstrjcFF',
+                'host' => 'https://perfectum.ua/',
                 'username' => 'perfectum',
                 'password' => 'password1'
             ]
